@@ -4,7 +4,6 @@
 
   <meta charset="UTF-8" />
 
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Invitation Noël personnalisée</title>
 
@@ -238,29 +237,7 @@ body.view-only .audio-wrapper {
   .form-group input,
   .form-group textarea { font-size: 1rem; }
 }
-/* 📱 MOBILE FIX – agrandir la carte */
-@media (max-width: 600px) {
-  .card-wrapper {
-    width: 100vw !important;
-    height: auto;
-    aspect-ratio: unset;
-    background-size: cover !important;
-    padding-bottom: 60%;  /* hauteur approximative */
-  }
 
-  .date-text,
-  .time-text,
-  .place-text {
-    transform: translate(-50%, -50%);
-    font-size: 3.5vw !important;
-    left: 50% !important;  /* centrer automatiquement */
-  }
-
-  .place-text {
-    max-width: 80%;
-    font-size: 3.2vw !important;
-  }
-}
 @media (max-width: 600px) {
   .form-wrapper {
     width: 95vw;
@@ -278,12 +255,52 @@ body.view-only .audio-wrapper {
     max-width: none;
   }
 }
+@media (max-width: 600px) {
+  .card-wrapper {
+    width: 100vw !important;
+    height: auto;
+    aspect-ratio: unset;
+    background-size: cover !important;
+    padding-bottom: 60%;
+  }
+
+  .date-text,
+  .time-text,
+  .place-text {
+    transform: translate(-50%, -50%);
+    font-size: 3.5vw !important;
+    left: 50% !important;
+  }
+
+  .place-text {
+    max-width: 80%;
+    font-size: 3.2vw !important;
+  }
+}
+
 
   </style>
 </head>
 <body>
 
   <!-- FORMULAIRE DE PERSONNALISATION -->
+
+
+  <!-- CARTE D'INVITATION -->
+  <div class="card-wrapper">
+    <div class="card-text date-text" id="dateText">
+      24 DECEMBER 2025
+    </div>
+
+    <div class="card-text time-text" id="timeText">
+      7:30 PM
+    </div>
+
+    <div class="card-text place-text" id="placeText">
+      123 CHRISTMAS STREET
+      PARIS, FRANCE
+    </div>
+  </div>
 
 <div class="form-wrapper">
   <div class="form-header">
@@ -347,23 +364,6 @@ body.view-only .audio-wrapper {
     </button>
     <input id="shareLink" type="text" readonly placeholder="Le lien apparaîtra ici" />
   </div>
-
-  <!-- CARTE D'INVITATION -->
-  <div class="card-wrapper">
-    <div class="card-text date-text" id="dateText">
-      24 DECEMBER 2025
-    </div>
-
-    <div class="card-text time-text" id="timeText">
-      7:30 PM
-    </div>
-
-    <div class="card-text place-text" id="placeText">
-      123 CHRISTMAS STREET
-      PARIS, FRANCE
-    </div>
-  </div>
-
 
   <!-- AUDIO + LIEN CHANSON (uniquement en mode lien partagé) -->
   <div class="audio-wrapper">
