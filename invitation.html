@@ -1,296 +1,309 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
   <meta charset="UTF-8" />
+
+
   <title>Invitation Noël personnalisée</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    html, body {
-      height: 100%;
-    }
+html, body {
+  height: 100%;
+}
 
-    body {
-      margin: 0;
-      background: #c1d7c6;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      min-height: 100vh;
-      padding: 16px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
+body {
+  margin: 0;
+  background: #c1d7c6;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+  padding: 16px;
+  box-sizing: border-box;
 
-    /* Centrage quand on est en mode "lien partagé" */
-    body.view-only {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 77vh;
-      padding: 16px;
-      box-sizing: border-box;
-    }
+  /* ✅ force la possibilité de scroller en vertical */
+  overflow-y: auto;      /* ou: overflow-y: scroll; si tu veux voir la barre même quand il n'y a pas besoin */
+}
+/* Centrage quand on est en mode "lien partagé" */
+body.view-only {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centre verticalement */
+  align-items: center;     /* centre horizontalement */
+  min-height: 77vh;
+  padding: 16px;
+  box-sizing: border-box;
+}
 
-    /* --- FORMULAIRE DE PERSO --- */
-    .form-wrapper {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 20px 24px;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+/* --- FORMULAIRE DE PERSO --- */
+.form-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 
-      display: grid;
-      grid-template-columns: repeat(3, minmax(180px, 1fr));
-      gap: 12px 20px;
-      align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 12px 20px;
+  align-items: flex-start;
 
-      max-width: 1100px;
-      margin: 16px auto 0;
-    }
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
-    .form-header {
-      grid-column: 1 / -1;
-      text-align: center;
-      margin-bottom: 8px;
-    }
+.form-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 8px;
+}
 
-    .customization-title {
-      margin: 0 0 4px;
-      font-size: 1.4rem;
-      text-align: center;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
+/* Titre de la zone de personnalisation */
+.customization-title {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+  text-align: center;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
 
-    .customization-subtitle {
-      margin: 0 0 12px;
-      font-size: 0.9rem;
-      text-align: center;
-      opacity: 0.8;
-    }
+/* Petit texte sous le titre */
+.customization-subtitle {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0.8;
+}
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      font-size: 0.9rem;
-    }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
 
-    .form-group label {
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
+.form-group label {
+  margin-bottom: 4px;
+  font-weight: 600;
+}
 
-    .form-group input,
-    .form-group textarea {
-      padding: 6px 10px;
-      border-radius: 12px;
-      border: 1px solid #bbb;
-      font-size: 0.9rem;
-      resize: vertical;
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
-    }
+.form-group input,
+.form-group textarea {
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid #bbb;
+  font-size: 0.9rem;
+  resize: vertical;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
 
-    .form-group textarea {
-      min-height: 48px;
-    }
+.form-group textarea {
+  min-height: 48px;
+}
 
-    .form-group.location-group {
-      grid-column: 1 / -1;
-    }
+/* Location sur toute la largeur */
+.form-group.location-group {
+  grid-column: 1 / -1;
+}
 
-    /* --- ZONE PARTAGE --- */
-    .share-wrapper {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 10px 14px;
-      border-radius: 999px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      max-width: 580px;
-      width: 100%;
-      margin: 12px auto 0;
-      flex-wrap: wrap;
-    }
+/* --- ZONE PARTAGE --- */
+.share-wrapper {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 580px;
+  width: 100%;
+  margin: 12px auto 0;
+  flex-wrap: wrap;
+}
 
-    .share-wrapper button {
-      border: none;
-      border-radius: 999px;
-      padding: 10px 16px;
-      background: #a72929;
-      color: #fff;
-      font-size: 0.95rem;
-      cursor: pointer;
-      white-space: nowrap;
-    }
+.share-wrapper button {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: #a72929;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
 
-    .share-wrapper button:hover {
-      opacity: 0.9;
-    }
+.share-wrapper button:hover {
+  opacity: 0.9;
+}
 
-    .share-wrapper input {
-      border: none;
-      outline: none;
-      font-size: 0.85rem;
-      flex: 1 1 240px;
-      max-width: 100%;
-      background: transparent;
-    }
+.share-wrapper input {
+  border: none;
+  outline: none;
+  font-size: 0.85rem;
+  flex: 1 1 240px;
+  max-width: 100%;
+  background: transparent;
+}
 
-    /* --- CARTE --- */
-    .card-wrapper {
-      position: relative;
-      width: min(1100px, 100vw - 32px);
-      aspect-ratio: 928 / 410;
-      background: url("invitation-christmas.png") center center no-repeat;
-      background-size: contain;
-      margin: 0 auto;
-    }
+/* --- CARTE --- */
+.card-wrapper {
+  position: relative;
+  width: min(1100px, 100vw - 32px);
+  aspect-ratio: 928 / 410;
+  background: url("invitation-christmas.png") center center no-repeat;
+  background-size: contain;
+  margin: 0 auto; /* au lieu de 8px auto 0; */
+}
 
-    .card-text {
-      position: absolute;
-      color: #111;
-      font-family: "Courier New", monospace;
-      letter-spacing: 0.08em;
-    }
+.card-text {
+  position: absolute;
+  color: #111;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.08em;
+}
 
-    .date-text {
-      top: 44%;
-      left: 41%;
-      font-size: clamp(12px, 2.8vw, 20px);
-      white-space: nowrap;
-    }
+/* Font-size responsive : min, préféré, max */
+.date-text {
+  top: 44%;
+  left: 41%;
+  font-size: clamp(12px, 2.8vw, 20px);
+  white-space: nowrap;
+}
 
-    .time-text {
-      top: 52%;
-      left: 48%;
-      font-size: clamp(12px, 2.6vw, 18px);
-      white-space: nowrap;
-    }
+.time-text {
+  top: 52%;
+  left: 38%;
+  font-size: clamp(12px, 2.6vw, 18px);
+  white-space: nowrap;
+}
 
-    .place-text {
-      top: 59%;
-      left: 52%;
-      transform: translateX(-50%);
-      font-size: clamp(11px, 2.4vw, 16px);
-      max-width: 80%;
-      white-space: pre-line;
-      text-align: center;
-    }
+.place-text {
+  top: 59%;
+  left: 52%;
+  transform: translateX(-50%);
+  font-size: clamp(11px, 2.4vw, 16px);
+  max-width: 80%;
+  white-space: pre-line;
+  text-align: center;
+}
 
-    /* Bloc audio sous la carte – caché par défaut */
-    .audio-wrapper {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-top: 16px;
-    }
+/* Bloc audio sous la carte – caché par défaut */
+.audio-wrapper {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
 
-    .audio-wrapper h3 {
-      margin: 0;
-      font-size: 1rem;
-      font-weight: 600;
-    }
+.audio-wrapper h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
 
-    .audio-wrapper audio {
-      width: 100%;
-      max-width: 420px;
-      border-radius: 8px;
-    }
+.audio-wrapper audio {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 8px;
+}
 
-    .song-link {
-      font-size: 0.9rem;
-      text-decoration: none;
-      color: #a72929;
-      font-weight: 600;
-    }
+/* Lien vers la chanson (YouTube / Spotify...) */
+.song-link {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #a72929;
+  font-weight: 600;
+}
 
-    .song-link:hover {
-      text-decoration: underline;
-    }
+.song-link:hover {
+  text-decoration: underline;
+}
 
-    /* Mode "vue partagée" */
-    body.view-only .form-wrapper,
-    body.view-only .share-wrapper {
-      display: none;
-    }
+/* ✅ Mode "vue partagée" : on cache les inputs + partage, et on AFFICHE l'audio */
+body.view-only .form-wrapper,
+body.view-only .share-wrapper {
+  display: none;
+}
 
-    body.view-only .audio-wrapper {
-      display: flex;
-    }
+body.view-only .audio-wrapper {
+  display: flex;
+}
 
-    /* --- RESPONSIVE --- */
-    @media (max-width: 800px) {
-      .form-wrapper {
-        grid-template-columns: 1fr;
-        gap: 10px 12px;
-        padding: 14px;
-      }
+/* --- RESPONSIVE --- */
+@media (max-width: 800px) {
+  .form-wrapper {
+    grid-template-columns: 1fr;
+    gap: 10px 12px;
+    padding: 14px;
+  }
 
-      .share-wrapper {
-        border-radius: 14px;
-        padding: 10px;
-      }
+  .share-wrapper {
+    border-radius: 14px;
+    padding: 10px;
+  }
 
-      .share-wrapper button {
-        width: 100%;
-        text-align: center;
-      }
-    }
+  .share-wrapper button {
+    width: 100%;
+    text-align: center;
+  }
+}
 
-    @media (max-width: 480px) {
-      .customization-title { font-size: 1.2rem; }
-      .customization-subtitle { font-size: 0.95rem; }
-      .form-group label { font-size: 0.95rem; }
-      .form-group input,
-      .form-group textarea { font-size: 1rem; }
-    }
+@media (max-width: 480px) {
+  .customization-title { font-size: 1.2rem; }
+  .customization-subtitle { font-size: 0.95rem; }
+  .form-group label { font-size: 0.95rem; }
+  .form-group input,
+  .form-group textarea { font-size: 1rem; }
+}
 
-    /* Regroupé + adaptation mobile de la carte */
-    @media (max-width: 600px) {
-      .form-wrapper {
-        width: 95vw;
-        padding: 16px;
-        grid-template-columns: 1fr;
-      }
+@media (max-width: 600px) {
+  .form-wrapper {
+    width: 95vw;
+    padding: 16px;
+    grid-template-columns: 1fr;
+  }
 
-      .share-wrapper {
-        flex-direction: column;
-        width: 95vw;
-      }
+  .share-wrapper {
+    flex-direction: column;
+    width: 95vw;
+  }
 
-      .share-wrapper input {
-        width: 100%;
-        max-width: none;
-      }
+  .share-wrapper input {
+    width: 100%;
+    max-width: none;
+  }
+}
+@media (max-width: 600px) {
+  .card-wrapper {
+    width: 100vw !important;
+    height: auto;
+    aspect-ratio: unset;
+    background-size: cover !important;
+    padding-bottom: 88%;
+    margin-bottom:30%;
+  }
 
-      .card-wrapper {
-        width: 100vw !important;
-        height: auto;
-        aspect-ratio: unset;
-        background-size: cover !important;
-        padding-bottom: 88%;
-        margin-bottom: 30%;
-      }
+  .date-text,
+  .time-text,
+  .place-text {
+    transform: translate(-50%, -50%);
+    font-size: 3.5vw !important;
+    left: 50% !important;
+  }
 
-      .date-text,
-      .time-text,
-      .place-text {
-        left: 50% !important;
-        transform: translate(-50%, -50%);
-        font-size: clamp(10px, 3.5vw, 16px) !important;
-      }
+  .place-text {
+    max-width: 80%;
+    font-size: 3.2vw !important;
+  }
+}
 
-      .place-text {
-        max-width: 80%;
-        font-size: clamp(9px, 3.2vw, 15px) !important;
-      }
-    }
+
   </style>
 </head>
 <body>
+
+  <!-- FORMULAIRE DE PERSONNALISATION -->
+
 
   <!-- CARTE D'INVITATION -->
   <div class="card-wrapper">
@@ -308,62 +321,60 @@
     </div>
   </div>
 
-  <!-- FORMULAIRE DE PERSONNALISATION -->
-  <div class="form-wrapper">
-    <div class="form-header">
-      <h2 class="customization-title">
-        Customize your invitation
-      </h2>
-      <p class="customization-subtitle">
-        Edit the date, time and location so the card matches your event.
-      </p>
-    </div>
-
-    <!-- DATE -->
-    <div class="form-group">
-      <label for="dateInput">Date</label>
-      <input id="dateInput" type="text" placeholder="24 DECEMBER 2025" />
-    </div>
-    <div class="form-group">
-      <label for="dateTopInput">Date – Vertical position (%)</label>
-      <input id="dateTopInput" type="number" min="0" max="100" step="0.5" value="44" />
-    </div>
-    <div class="form-group">
-      <label for="dateLeftInput">Date – Horizontal position (%)</label>
-      <input id="dateLeftInput" type="number" min="0" max="100" step="0.5" value="41" />
-    </div>
-
-    <!-- TIME -->
-    <div class="form-group">
-      <label for="timeInput">Time</label>
-      <input id="timeInput" type="text" placeholder="7:30 PM" />
-    </div>
-    <div class="form-group">
-      <label for="timeTopInput">Time – Vertical position (%)</label>
-      <input id="timeTopInput" type="number" min="0" max="100" step="0.5" value="52" />
-    </div>
-    <div class="form-group">
-      <label for="timeLeftInput">Time – Horizontal position (%)</label>
-      <input id="timeLeftInput" type="number" min="0" max="100" step="0.5" value="48" />
-    </div>
-
-    <!-- LOCATION -->
-    <div class="form-group">
-      <label for="placeInput">Location (line breaks allowed)</label>
-      <textarea
-        id="placeInput"
-        placeholder="123 CHRISTMAS STREET&#10;PARIS, FRANCE"
-      ></textarea>
-    </div>
-    <div class="form-group">
-      <label for="placeTopInput">Location – Vertical position (%)</label>
-      <input id="placeTopInput" type="number" min="0" max="100" step="0.5" value="59" />
-    </div>
-    <div class="form-group">
-      <label for="placeLeftInput">Location – Horizontal position (%)</label>
-      <input id="placeLeftInput" type="number" min="0" max="100" step="0.5" value="52" />
-    </div>
+<div class="form-wrapper">
+  <div class="form-header">
+    <h2 class="customization-title">
+      Customize your invitation
+    </h2>
+    <p class="customization-subtitle">
+      Edit the date, time and location so the card matches your event.
+    </p>
   </div>
+  <!-- DATE -->
+  <div class="form-group">
+    <label for="dateInput">Date</label>
+    <input id="dateInput" type="text" placeholder="24 DECEMBER 2025" />
+  </div>
+  <div class="form-group">
+    <label for="dateTopInput">Date – Vertical position (%)</label>
+    <input id="dateTopInput" type="number" min="0" max="100" step="0.5" value="44" />
+  </div>
+  <div class="form-group">
+    <label for="dateLeftInput">Date – Horizontal position (%)</label>
+    <input id="dateLeftInput" type="number" min="0" max="100" step="0.5" value="41" />
+  </div>
+
+  <!-- TIME -->
+  <div class="form-group">
+    <label for="timeInput">Time</label>
+    <input id="timeInput" type="text" placeholder="7:30 PM" />
+  </div>
+  <div class="form-group">
+    <label for="timeTopInput">Time – Vertical position (%)</label>
+    <input id="timeTopInput" type="number" min="0" max="100" step="0.5" value="52" />
+  </div>
+  <div class="form-group">
+    <label for="timeLeftInput">Time – Horizontal position (%)</label>
+    <input id="timeLeftInput" type="number" min="0" max="100" step="0.5" value="48" />
+  </div>
+
+  <!-- LOCATION -->
+  <div class="form-group">
+    <label for="placeInput">Location (line breaks allowed)</label>
+    <textarea
+      id="placeInput"
+      placeholder="123 CHRISTMAS STREET&#10;PARIS, FRANCE"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="placeTopInput">Location – Vertical position (%)</label>
+    <input id="placeTopInput" type="number" min="0" max="100" step="0.5" value="59" />
+  </div>
+  <div class="form-group">
+    <label for="placeLeftInput">Location – Horizontal position (%)</label>
+    <input id="placeLeftInput" type="number" min="0" max="100" step="0.5" value="52" />
+  </div>
+</div>
 
   <!-- BOUTON + LIEN DE PARTAGE -->
   <div class="share-wrapper">
@@ -383,7 +394,7 @@
 
     <a
       class="song-link"
-      href="https://youtube.com"
+      href="https://youtube.com" 
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -391,6 +402,7 @@
     </a>
   </div>
 
+ 
   <script>
     // Inputs
     const dateInput      = document.getElementById('dateInput');
@@ -421,7 +433,7 @@
     const defaultDateTop   = 44;
     const defaultDateLeft  = 41;
     const defaultTimeTop   = 52;
-    const defaultTimeLeft  = 48;  // aligné avec le CSS et l’input
+    const defaultTimeLeft  = 84;
     const defaultPlaceTop  = 59;
     const defaultPlaceLeft = 52;
 
@@ -530,16 +542,16 @@
 
     // Init de base
     updateCardFromInputs();
-
     // 🎵 Lancer la chanson après la première interaction en mode lien partagé
-    document.addEventListener('click', () => {
-      if (document.body.classList.contains('view-only')) {
-        const inviteAudio = document.getElementById('invite-audio');
-        if (inviteAudio) {
-          inviteAudio.play().catch(() => {});
-        }
-      }
-    }, { once: true });
+document.addEventListener('click', () => {
+  if (document.body.classList.contains('view-only')) {
+    const inviteAudio = document.getElementById('invite-audio');
+    if (inviteAudio) {
+      inviteAudio.play().catch(() => {});
+    }
+  }
+}, { once: true });
+
   </script>
 
 </body>
