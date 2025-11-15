@@ -34,6 +34,41 @@
       padding: 0 20px;
     }
 
+    /* Pour cacher/afficher les "pages" */
+    .hidden {
+      display: none;
+    }
+/* Page 2 plein écran, sans fond ni marge */
+#page2 {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  z-index: 999;
+}
+
+/* Iframe occupe tout l’écran */
+#invitationFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Bouton retour flottant en bas à gauche */
+#page2 .back-btn {
+  position: absolute;
+  bottom: 10px;   /* ⬅ au lieu de top */
+  left: 10px;
+  z-index: 1000;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #a72929;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
     /* === NAVBAR ROUGE #a72929 === */
     header {
       position: sticky;
@@ -87,15 +122,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 140px 20px;
+      padding: 160px 20px;
       text-align: center;
     }
 
-    /* Bloc blanc responsive, toujours centré */
     .cover-content {
       background: rgba(255, 255, 255, 0.85);
-      width: min(480px, 90vw);   /* max 480px, mais jamais plus de 90% de la largeur écran */
-      aspect-ratio: 1 / 1;       /* forme carrée qui s’adapte */
+  width: min(700px, 95vw);      /* AVANT: 480px → maintenant plus large */
+  aspect-ratio: 4 / 3;          /* AVANT: 1/1 → rectangle */
       border-radius: 24px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       display: flex;
@@ -105,7 +139,6 @@
       transform-origin: center;
     }
 
-    /* Colonne image + bouton */
     .cover-inner {
       display: flex;
       flex-direction: column;
@@ -123,7 +156,6 @@
       border-radius: 12px;
     }
 
-    /* Bouton vert sous l'image, centré */
     .cover-btn-green {
       display: inline-block;
       padding: 8px 18px;
@@ -143,126 +175,111 @@
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     }
 
-    /* === SECTION 2 : IMAGE GAUCHE + VIDEO DROITE === */
-    #clip {
-      background: rgba(255, 255, 255, 0.9);
-      display: flex;
-      align-items: center;
-    }
-
-    #clip .inner {
-      padding: 60px 0;
-    }
-
-    #clip h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    #clip p {
-      margin-bottom: 30px;
-      color: #555;
-      text-align: center;
-    }
-
-    .clip-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      align-items: center;
-    }
-
-    .clip-grid img {
-      width: 100%;
-      max-height: 520px;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    }
-
-    .clip-grid video,
-    .clip-grid iframe {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-      background: #000;
-      border: none;
-    }
-
-    .stream-buttons {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .stream-buttons a {
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--rose), var(--violet));
-      color: #fff;
-      font-size: 0.9rem;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .stream-buttons a:hover {
-      opacity: 0.9;
-    }
-
-    /* === SECTION 3 : PRODUITS DÉFILANTS === */
-    #produits {
-      background-color: #3d6a48;
-      color: #fff;
-      border-top: 4px solid var(--rose);
-      border-bottom: 4px solid var(--rose);
-      display: flex;
-      align-items: center;
-    }
-/* Image bannière au-dessus du titre (déjà ajouté chez toi normalement) */
-/* Image bannière au-dessus du titre */
-.produits-header-image {
-  display: block;
-  margin: 0 auto 20px;
-  max-width: 100%;
-  height: auto;
+    /* === SECTION 2 : CLIP === */
+   /* SECTION CLIP plus centrée et large */
+#clip {
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centre le contenu horizontalement */
 }
 
-/* ✅ Titre de la section invitations */
-.produits-title {
-  text-align: center;
-  font-size: 2.4rem;        /* plus grand */
-  margin: 0 0 20px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+#clip .inner {
+  padding: 80px 20px;      /* un peu plus d'espace */
+  text-align: center;      /* centre le texte */
 }
 
-/* Carrousel : une seule image visible à la fois */
-.carousel-wrapper {
+/* On force un seul bloc centré */
+.clip-grid {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
 }
 
-.carousel {
-width: min(600px, 90vw);
-  position: relative;
+/* Vidéo plus grande et centrée */
+.clip-grid video {
+  width: min(900px, 100%); /* plus grande mais reste responsive */
+  max-width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+.stream-buttons {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
 }
 
-.carousel .slide {
-  width: 100%;
-  height: auto;
-  border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  display: none;
+/* Boutons bien rouges et plus grands */
+.stream-buttons a {
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: #a72929;        /* rouge */
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  border: 2px solid #7c1313;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
-.carousel .slide.active {
-  display: block;
+.stream-buttons a:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
 }
+
+
+    /* === SECTION 3 : PRODUITS / INVITATIONS === */
+#produits {
+  background-color: #3d6a48;
+  color: #fff;
+  border-top: 4px solid var(--rose);
+  border-bottom: 4px solid var(--rose);
+  display: flex;
+  align-items: center;
+  padding: 60px 0 140px;  /* haut | gauche/droite | BAS  ← ajouté */
+}
+
+    .produits-header-image {
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .produits-title {
+      text-align: center;
+      font-size: 2.4rem;
+      margin: 0 0 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .carousel-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .carousel {
+      width: min(600px, 90vw);
+      position: relative;
+    }
+
+    .carousel .slide {
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      display: none;
+      cursor: pointer;
+    }
+
+    .carousel .slide.active {
+      display: block;
+    }
 
     @keyframes defilement {
       0%   { transform: translateX(0); }
@@ -270,33 +287,32 @@ width: min(600px, 90vw);
     }
 
     /* === SECTION 4 : CHANSON AUDIO === */
-#chanson {
-  min-height: 80vh; /* pas obligé que ce soit 100%, tu peux remettre 100vh si tu veux */
-  background: #f0e8dd url("background-audio.png") right center no-repeat;
-  background-size: contain;          /* ✅ l'image est entière, pas coupée */
-  color: #222;
-  display: flex;
-  align-items: center;
-}
+    #chanson {
+      min-height: 80vh;
+      background: #f0e8dd url("background-audio.png") right center no-repeat;
+      background-size: contain;
+      color: #222;
+      display: flex;
+      align-items: center;
+    }
 
-/* Contenu plutôt au centre/gauche pour laisser voir le sapin */
-#chanson .inner {
-  padding: 60px 20px;
-  text-align: center;
-  max-width: 600px;
-  margin-left: 5vw;   /* décale un peu vers la gauche */
-    color: #8f0000;
+    #chanson .inner {
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 600px;
+      margin-left: 5vw;
+      color: #8f0000;
+    }
 
-}
-#chanson h2 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
-}
+    #chanson h2 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
 
-#chanson p {
-  margin-bottom: 20px;
-  opacity: 0.9;
-}
+    #chanson p {
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
 
     audio {
       width: 100%;
@@ -305,7 +321,7 @@ width: min(600px, 90vw);
     }
 
     footer {
-      background: #000;
+      background: #11562d;
       color: #aaa;
       text-align: center;
       padding: 18px;
@@ -314,7 +330,6 @@ width: min(600px, 90vw);
 
     /* === RESPONSIVE === */
     @media (max-width: 900px) {
-
       nav {
         display: none;
       }
@@ -332,8 +347,40 @@ width: min(600px, 90vw);
         height: 180px;
       }
     }
+    /* Flèches du carrousel */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
 
-    /* Animation du carré */
+.carousel-arrow.left {
+  left: -20px;   /* ajuste si besoin */
+}
+
+.carousel-arrow.right {
+  right: -20px;  /* ajuste si besoin */
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+
     @keyframes pulseBox {
       0% {
         transform: scale(1);
@@ -352,144 +399,206 @@ width: min(600px, 90vw);
 </head>
 
 <body>
-  <audio id="bg-music" src="euphoric.mp4" autoplay loop></audio>
+  <!-- Musique de fond qui doit rester -->
 
+  <!-- 🔹 "Page 1" = ton site normal -->
+  <div id="page1">
 
-  <!-- NAVBAR -->
-  <header>
-    <div class="nav-inner">
-      <div class="brand">
-        EUPHORICHRISTMAS
+    <!-- NAVBAR -->
+    <header>
+      <div class="nav-inner">
+        <div class="brand">
+          EUPHORICHRISTMAS
+        </div>
+<nav>
+  <a href="#cover">Home</a>
+  <a href="#produits">Christmas Invitations</a>
+  <a href="#chanson">The Song</a>
+  <a href="#clip">Music Video</a>
+</nav>
       </div>
-      <nav>
-        <a href="#cover">Accueil</a>
-        <a href="#produits">Produits</a>
-        <a href="#chanson">Chanson</a>
-        <a href="#clip">Clip</a>
-      </nav>
-    </div>
-  </header>
+    </header>
 
-  <!-- SECTION COVER -->
-  <section id="cover">
-    <div class="cover-content">
-      <div class="cover-inner">
+    <!-- SECTION COVER -->
+    <section id="cover">
+      <div class="cover-content">
+        <div class="cover-inner">
+          <img
+            src="echarpe-texte.png"
+            alt="Écharpe de Noël avec citation"
+            class="cover-image"
+          >
+          <a href="#produits" class="cover-btn-green">
+           Invite your loved ones
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION INVITATIONS -->
+    <section id="produits">
+      <div class="container inner">
         <img
-          src="echarpe-texte.png"
-          alt="Écharpe de Noël avec citation"
-          class="cover-image"
+          src="banniere-produits.png"
+          alt="Christmas décor for the shop"
+          class="produits-header-image"
         >
-        <a href="#produits" class="cover-btn-green">
-          Voir les produits de Noël
-        </a>
-      </div>
-    </div>
-  </section>
 
-<!-- SECTION INVITATIONS -->
-<section id="produits">
+        <h2 class="produits-title">Christmas Invitations</h2>
+<p style="text-align:center; max-width:700px; margin:0 auto 20px; font-size:0.95rem;">
+  Create and personalize your own Christmas party invitations inspired by our song
+  <strong>“Euphoric Christmas”</strong>. Choose a design, edit the details and share it
+  with your friends and family – it’s completely free.
+</p>
+
+        <div class="carousel-wrapper">
+        <div class="carousel">
+  <!-- flèche gauche -->
+  <button type="button" class="carousel-arrow left" onclick="prevSlide()">&#10094;</button>
+
+  <!-- Invitation 1 -->
+  <a href="#" onclick="openInvitation('invitation.html'); return false;">
+    <img class="slide active" src="invitation-christmas1 .png" alt="Invitation 1">
+  </a>
+
+  <!-- Invitation 2 -->
+  <a href="#" onclick="openInvitation('invitation2.html'); return false;">
+    <img class="slide" src="invitation-christmas2.png" alt="Invitation 2">
+  </a>
+
+  <!-- Invitation 3 -->
+  <a href="#" onclick="openInvitation('invitation3.html'); return false;">
+    <img class="slide" src="invitation-christmas3.png" alt="Invitation 3">
+  </a>
+
+  <!-- Invitation 4 -->
+  <a href="#" onclick="openInvitation('invitation4.html'); return false;">
+    <img class="slide" src="invitation-christmas4.png" alt="Invitation 4">
+  </a>
+
+  <!-- flèche droite -->
+  <button type="button" class="carousel-arrow right" onclick="nextSlide()">&#10095;</button>
+</div>
+
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION CHANSON AUDIO -->
+   <section id="chanson">
   <div class="container inner">
-    <img
-      src="banniere-produits.png"
-      alt="Christmas décor for the shop"
-      class="produits-header-image"
-    >
+    <h2>Listen to the song</h2>
+    <p>“Euphoric Christmas” is our original holiday song, created to bring warmth,
+  joy and a touch of magic to your celebrations. Hit play and let the mood begin.
+</p>
 
-    <!-- ✅ Titre en anglais, centré -->
-    <h2 class="produits-title">Christmas Invitations</h2>
-
-    <div class="carousel-wrapper">
-      <div class="carousel">
-        <!-- Invitation 1 -->
-        <a href="invitation.html">
-          <img class="slide active" src="invitation-christmas1 .png" alt="Invitation 1">
-        </a>
-
-        <!-- Invitation 2 -->
-        <a href="invitation2.html">
-          <img class="slide" src="invitation-christmas2.png" alt="Invitation 2">
-        </a>
-
-        <!-- Invitation 3 -->
-        <a href="invitation3.html">
-          <img class="slide" src="invitation-christmas3.png" alt="Invitation 3">
-        </a>
-                <!-- Invitation 3 -->
-        <a href="invitation4.html">
-          <img class="slide" src="invitation-christmas4.png" alt="Invitation 4">
-        </a>
-      </div>
-    </div>
+    <!-- UN SEUL audio : il sert de background ET de lecteur avec barre de progression -->
+    <audio id="bg-music" src="euphoric.mp4" controls autoplay loop>
+      Votre navigateur ne supporte pas la lecture audio.
+    </audio>
   </div>
 </section>
 
 
+    <!-- SECTION CLIP -->
+    <section id="clip">
+      <div class="container inner">
+        <h2>🎬 Official music video</h2>
+        <p> Step into the world of “Euphoric Christmas”. Watch the official music video
+  and feel the festive atmosphere that inspired our free invitations.</p>
 
-  <!-- SECTION CHANSON AUDIO -->
-  <section id="chanson">
-    <div class="container inner">
-      <h2>Écoutez la chanson</h2>
-      <p>La magie de Noël en musique, signée OMHY Entertainment.</p>
-      <audio controls>
-      <source src="euphoric.mp4" type="audio/mpeg">
-         Votre navigateur ne supporte pas la lecture audio.
-      </audio>
-    </div>
-  </section>
-
-  <!-- SECTION CLIP : IMAGE GAUCHE + VIDÉO DROITE -->
-  <section id="clip">
-    <div class="container inner">
-      <h2>🎬 Clip officiel</h2>
-      <p>Plongez dans l’univers chaleureux de notre nouvelle chanson de Noël.</p>
-
-      <div class="clip-grid">
-     
-        <div>
-          <video src="clip.mp4" controls autoplay muted loop></video>
-          <div class="stream-buttons">
-            <a href="#">Spotify</a>
-            <a href="#">Apple Music</a>
-            <a href="#">YouTube</a>
+        <div class="clip-grid">
+          <div>
+            <video src="clip.mp4" controls autoplay muted loop></video>
+            <div class="stream-buttons">
+              <a href="#">Spotify</a>
+              <a href="#">Apple Music</a>
+              <a href="#">YouTube</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    © 2025 OMHY Entertainment – Tous droits réservés
-  </footer>
-<script>
-  // Slider produits : affiche une slide à la fois
-  const slides = document.querySelectorAll('#produits .carousel .slide');
-  let currentIndex = 0;
+    <footer>
+      © 2025 OMHY Entertainment – All rights reserved
+    </footer>
+  </div>
 
-  function showSlide(index) {
-    slides.forEach((img, i) => {
-      img.classList.toggle('active', i === index);
-    });
-  }
+ <!-- 🔹 "Page 2" = invitation plein écran -->
+<div id="page2" class="hidden">
+  <button
+    type="button"
+    class="back-btn"
+    onclick="backToMain()"
+  >
+    ← Back 
+  </button>
 
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  }
+  <iframe
+    id="invitationFrame"
+    src=""
+  ></iframe>
+</div>
 
-  // on change d'image toutes les 3 secondes (3000 ms)
-  if (slides.length > 0) {
-    showSlide(currentIndex);
-    setInterval(nextSlide, 3000);
-  }
-  const bgMusic = document.getElementById('bg-music');
+  </div>
 
-document.addEventListener('click', () => {
-  if (bgMusic) {
-    bgMusic.play().catch(() => {});
-  }
-}, { once: true });
+  <script>
+    // Slider produits : affiche une slide à la fois
+    const slides = document.querySelectorAll('#produits .carousel .slide');
+    let currentIndex = 0;
 
-</script>
+    function showSlide(index) {
+      slides.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }
+
+    if (slides.length > 0) {
+      showSlide(currentIndex);
+      setInterval(nextSlide, 3000);
+    }
+
+    // Musique : autoriser après un clic utilisateur
+    const bgMusic = document.getElementById('bg-music');
+    document.addEventListener('click', () => {
+      if (bgMusic) {
+        bgMusic.play().catch(() => {});
+      }
+    }, { once: true });
+
+    // Ouvrir une invitation dans la "page 2"
+    function openInvitation(url) {
+      const page1 = document.getElementById('page1');
+      const page2 = document.getElementById('page2');
+      const frame = document.getElementById('invitationFrame');
+
+      if (page1 && page2 && frame) {
+        page1.classList.add('hidden');
+        page2.classList.remove('hidden');
+        frame.src = url;   // charge invitation.html, invitation2.html, etc.
+      }
+    }
+
+    // Revenir au site principal
+    function backToMain() {
+      const page1 = document.getElementById('page1');
+      const page2 = document.getElementById('page2');
+      const frame = document.getElementById('invitationFrame');
+
+      if (page1 && page2 && frame) {
+        frame.src = '';
+        page2.classList.add('hidden');
+        page1.classList.remove('hidden');
+      }
+    }
+  </script>
 
 </body>
 </html>

@@ -18,27 +18,62 @@
     }
 
     /* --- FORMULAIRE DE PERSO --- */
-    .form-wrapper {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 16px 20px;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 20px;
-      justify-content: center;
-    }
+   /* --- FORMULAIRE DE PERSO --- */
+.form-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      font-size: 0.9rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 12px 20px;
+  align-items: flex-start;
+}
 
-    .form-group label {
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
+/* bloc titre + texte à l'intérieur de la box, centré et sur toute la largeur */
+.form-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.customization-title {
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.customization-subtitle {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.form-group label {
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+/* Location sur toute la largeur */
+.form-group.location-group {
+  grid-column: 1 / -1;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .form-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
 
     .form-group input,
     .form-group textarea {
@@ -89,6 +124,47 @@
       max-width: 60vw;
       background: transparent;
     }
+/* Bloc audio sous la carte – caché par défaut */
+.audio-wrapper {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.audio-wrapper h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.audio-wrapper audio {
+  width: min(400px, 80vw);
+  border-radius: 8px;
+}
+
+/* Lien vers la chanson (YouTube / Spotify...) */
+.song-link {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #a72929;
+  font-weight: 600;
+}
+
+.song-link:hover {
+  text-decoration: underline;
+}
+
+/* ✅ Mode "vue partagée" : on cache les inputs + partage, et on AFFICHE l'audio */
+body.view-only .form-wrapper,
+body.view-only .share-wrapper {
+  display: none;
+}
+
+body.view-only .audio-wrapper {
+  display: flex;
+}
 
     /* --- CARTE --- */
     .card-wrapper {
@@ -147,49 +223,66 @@
 <body>
 
   <!-- FORMULAIRE DE PERSONNALISATION -->
-  <div class="form-wrapper">
-    <!-- DATE -->
-    <div class="form-group">
-      <label for="dateInput">Date</label>
-      <input id="dateInput" type="text" placeholder="24 DECEMBER 2025" />
-    </div>
-    <div class="form-group">
-      <label for="dateTopInput">Date - Top (%)</label>
-      <input id="dateTopInput" type="number" min="0" max="100" step="0.5" value="65" />
-    </div>
-    <div class="form-group">
-      <label for="dateLeftInput">Date - Left (%)</label>
-      <input id="dateLeftInput" type="number" min="0" max="100" step="0.5" value="29" />
-    </div>
 
-    <!-- HEURE -->
-    <div class="form-group">
-      <label for="timeInput">Heure</label>
-      <input id="timeInput" type="text" placeholder="7:30 PM" />
-    </div>
-    <div class="form-group">
-      <label for="timeTopInput">Heure - Top (%)</label>
-      <input id="timeTopInput" type="number" min="0" max="100" step="0.5" value="71" />
-    </div>
-    <div class="form-group">
-      <label for="timeLeftInput">Heure - Left (%)</label>
-      <input id="timeLeftInput" type="number" min="0" max="100" step="0.5" value="32" />
-    </div>
 
-    <!-- EMPLACEMENT -->
-    <div class="form-group">
-      <label for="placeInput">Emplacement (retour à la ligne possible)</label>
-      <textarea id="placeInput" placeholder="123 CHRISTMAS STREET&#10;PARIS, FRANCE"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="placeTopInput">Emplacement - Top (%)</label>
-      <input id="placeTopInput" type="number" min="0" max="100" step="0.5" value="78" />
-    </div>
-    <div class="form-group">
-      <label for="placeLeftInput">Emplacement - Left (%)</label>
-      <input id="placeLeftInput" type="number" min="0" max="100" step="0.5" value="36" />
-    </div>
+<!-- CUSTOMIZATION FORM -->
+<div class="form-wrapper">
+  <div class="form-header">
+    <h2 class="customization-title">
+      Customize your invitation
+    </h2>
+    <p class="customization-subtitle">
+      Edit the date, time and location so the card matches your event.
+    </p>
   </div>
+
+  <!-- DATE -->
+  <div class="form-group">
+    <label for="dateInput">Date</label>
+    <input id="dateInput" type="text" placeholder="24 DECEMBER 2025" />
+  </div>
+  <div class="form-group">
+    <label for="dateTopInput">Date – Vertical position (%)</label>
+    <input id="dateTopInput" type="number" min="0" max="100" step="0.5" value="65" />
+  </div>
+  <div class="form-group">
+    <label for="dateLeftInput">Date – Horizontal position (%)</label>
+    <input id="dateLeftInput" type="number" min="0" max="100" step="0.5" value="29" />
+  </div>
+
+  <!-- TIME -->
+  <div class="form-group">
+    <label for="timeInput">Time</label>
+    <input id="timeInput" type="text" placeholder="7:30 PM" />
+  </div>
+  <div class="form-group">
+    <label for="timeTopInput">Time – Vertical position (%)</label>
+    <input id="timeTopInput" type="number" min="0" max="100" step="0.5" value="71" />
+  </div>
+  <div class="form-group">
+    <label for="timeLeftInput">Time – Horizontal position (%)</label>
+    <input id="timeLeftInput" type="number" min="0" max="100" step="0.5" value="32" />
+  </div>
+
+  <!-- LOCATION -->
+  <div class="form-group location-group">
+    <label for="placeInput">Location (line breaks allowed)</label>
+    <textarea
+      id="placeInput"
+      placeholder="123 CHRISTMAS STREET&#10;PARIS, FRANCE"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="placeTopInput">Location – Vertical position (%)</label>
+    <input id="placeTopInput" type="number" min="0" max="100" step="0.5" value="78" />
+  </div>
+  <div class="form-group">
+    <label for="placeLeftInput">Location – Horizontal position (%)</label>
+    <input id="placeLeftInput" type="number" min="0" max="100" step="0.5" value="36" />
+  </div>
+</div>
+
+
 
   <!-- BOUTON + LIEN DE PARTAGE -->
 <div class="share-wrapper">
@@ -215,6 +308,26 @@
       PARIS, FRANCE
     </div>
   </div>
+  
+
+  <!-- AUDIO + LIEN CHANSON (uniquement en mode lien partagé) -->
+  <div class="audio-wrapper">
+    <h3>Listen to "Euphoric Christmas"</h3>
+
+    <audio id="invite-audio" src="euphoric.mp4" controls>
+      Your browser does not support the audio element.
+    </audio>
+
+    <a
+      class="song-link"
+      href="https://youtube.com" 
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Open the song on YouTube
+    </a>
+  </div>
+
 
   <script>
     // Inputs
