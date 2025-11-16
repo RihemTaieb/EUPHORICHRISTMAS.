@@ -33,37 +33,56 @@
       margin: 0 auto;
       padding: 0 20px;
     }
+.brand img {
+  height: 56px;          /* taille du logo */
+  width: auto;
+  border-radius: 12px;   /* coins arrondis */
+  object-fit: cover;
+  display: block;
 
+  /* ⭐ Bordure blanche autour de l'image */
+  border: 3px solid  #f0e8dd;
+
+  /* Optionnel : légère ombre pour que ça ressorte mieux */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+
+
+    /* Pour cacher/afficher les "pages" */
     .hidden {
       display: none;
     }
+/* Page 2 plein écran, sans fond ni marge */
+#page2 {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  z-index: 999;
+}
 
-    #page2 {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-    }
+/* Iframe occupe tout l’écran */
+#invitationFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
 
-    #invitationFrame {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
+/* Bouton retour flottant en bas à gauche */
+#page2 .back-btn {
+  position: absolute;
+  bottom: 10px;   /* ⬅ au lieu de top */
+  left: 10px;
+  z-index: 1000;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #a72929;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
 
-    #page2 .back-btn {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      z-index: 1000;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: none;
-      background: #a72929;
-      color: #fff;
-      cursor: pointer;
-      font-weight: 600;
-    }
 
     /* === NAVBAR ROUGE #a72929 === */
     header {
@@ -90,16 +109,6 @@
       gap: 8px;
       font-weight: bold;
       letter-spacing: 0.5px;
-    }
-
-    .brand img {
-      height: 56px;
-      width: auto;
-      border-radius: 12px;
-      object-fit: cover;
-      display: block;
-      border: 3px solid #f0e8dd;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
     }
 
     .brand .dot {
@@ -134,8 +143,8 @@
 
     .cover-content {
       background: rgba(255, 255, 255, 0.85);
-      width: min(400px, 95vw);
-      aspect-ratio: 4 / 3;
+  width: min(400px, 95vw);      /* AVANT: 480px → maintenant plus large */
+  aspect-ratio: 4 / 3;          /* AVANT: 1/1 → rectangle */
       border-radius: 24px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       display: flex;
@@ -154,56 +163,12 @@
       padding: 15px;
     }
 
-    /* ✅ Bloc compte à rebours dans la section 1 */
-    .hero-title {
-      font-size: 1.1rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin: 0;
-    }
-
-    .hero-subtitle {
-      margin: 4px 0 12px;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    .hero-countdown {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .hero-countdown-item {
-      background: rgb(3 57 4 / 10%);
+    .cover-image {
+      max-width: 100%;
+      max-height: 50%;
+      height: auto;
+      display: block;
       border-radius: 12px;
-      padding: 6px 10px;
-      min-width: 55px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 0.8rem;
-    }
-
-    .hero-countdown-item span.value {
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    .hero-countdown-item span.label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    /* 👉 GROS 10, 9, 8... pour les 10 dernières secondes */
-    .hero-final {
-      display: none;
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      color: #a72929;
     }
 
     .cover-btn-green {
@@ -225,218 +190,431 @@
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     }
 
-    @keyframes pulseBox {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
-
-    /* 🔥 ANIMATION BOOM */
-    @keyframes boomFlash {
-      0%   { transform: scale(1);   background-color: rgba(255, 255, 255, 0.85); }
-      25%  { transform: scale(1.05); background-color: #ffe5e5; }
-      50%  { transform: scale(0.98); background-color: #ffffff; }
-      75%  { transform: scale(1.04); background-color: #ffe5e5; }
-      100% { transform: scale(1);   background-color: rgba(255, 255, 255, 0.85); }
-    }
-
-    @keyframes boomShake {
-      0% { transform: translateX(0); }
-      20% { transform: translateX(-6px); }
-      40% { transform: translateX(6px); }
-      60% { transform: translateX(-4px); }
-      80% { transform: translateX(4px); }
-      100% { transform: translateX(0); }
-    }
-
-    .boom-effect {
-      animation:
-        boomFlash 0.8s ease-out 0s 2,
-        boomShake 0.4s ease-in-out 0.1s 2;
-    }
-
-    .boom-text {
-      color: #a72929;
-      font-weight: 700;
-    }
-
-    @media (max-width: 768px) {
-      .nav-inner {
-        padding: 20px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      nav a {
-        margin-left: 0;
-        margin-right: 12px;
-      }
-    }
-    .hero-logo {
-  width: 250px;             /* Taille idéale (tu peux changer) */
-  max-width: 88%;           /* Pour éviter qu’elle déborde sur petit écran */
-  height: auto;             /* Proportions conservées */
-  display: block;
-  margin: 0 auto 10px auto; /* Centre + espace sous l'image */
-  
-  border-radius: 16px;      /* Coins arrondis (modifie si tu veux plus/moins) */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* Ombre élégante */
-        border: 3px solid #3d6a48;
-
+    /* === SECTION 2 : CLIP === */
+   /* SECTION CLIP plus centrée et large */
+#clip {
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centre le contenu horizontalement */
 }
 
+#clip .inner {
+  padding: 80px 20px;      /* un peu plus d'espace */
+  text-align: center;      /* centre le texte */
+}
+
+/* On force un seul bloc centré */
+.clip-grid {
+  display: flex;
+  justify-content: center;
+}
+
+/* Vidéo plus grande et centrée */
+.clip-grid video {
+  width: min(900px, 100%); /* plus grande mais reste responsive */
+  max-width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+.stream-buttons {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* Boutons bien rouges et plus grands */
+.stream-buttons a {
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: #a72929;        /* rouge */
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  border: 2px solid #7c1313;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.stream-buttons a:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+}
+
+
+    /* === SECTION 3 : PRODUITS / INVITATIONS === */
+#produits {
+  background-color: #3d6a48;
+  color: #fff;
+  border-top: 4px solid var(--rose);
+  border-bottom: 4px solid var(--rose);
+  display: flex;
+  align-items: center;
+  padding: 60px 0 140px;  /* haut | gauche/droite | BAS  ← ajouté */
+}
+
+    .produits-header-image {
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .produits-title {
+      text-align: center;
+      font-size: 2.4rem;
+      margin: 0 0 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .carousel-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .carousel {
+      width: min(600px, 90vw);
+      position: relative;
+    }
+
+    .carousel .slide {
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      display: none;
+      cursor: pointer;
+    }
+
+    .carousel .slide.active {
+      display: block;
+    }
+
+    @keyframes defilement {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* === SECTION 4 : CHANSON AUDIO === */
+    #chanson {
+      min-height: 80vh;
+      background: #f0e8dd url("background-audio.png") right center no-repeat;
+      background-size: contain;
+      color: #222;
+      display: flex;
+      align-items: center;
+    }
+
+    #chanson .inner {
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 600px;
+      margin-left: 5vw;
+      color: #8f0000;
+    }
+
+    #chanson h2 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+
+    #chanson p {
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+    }
+
+    footer {
+      background: #11562d;
+      color: #aaa;
+      text-align: center;
+      padding: 18px;
+      font-size: 0.85rem;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 900px) {
+      nav {
+        display: none;
+      }
+
+      .clip-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .clip-grid img {
+        max-height: 320px;
+      }
+
+      .carousel img {
+        width: 180px;
+        height: 180px;
+      }
+    }
+    /* Flèches du carrousel */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.carousel-arrow.left {
+  left: -20px;   /* ajuste si besoin */
+}
+
+.carousel-arrow.right {
+  right: -20px;  /* ajuste si besoin */
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+
+    @keyframes pulseBox {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      50% {
+        transform: scale(1.03);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- 🔹 "Page 1" = ton site -->
+  <!-- Musique de fond qui doit rester -->
+
+  <!-- 🔹 "Page 1" = ton site normal -->
   <div id="page1">
 
     <!-- NAVBAR -->
     <header>
       <div class="nav-inner">
         <div class="brand">
-          <img src="logo.png" alt="Euphoric Christmas" />
+                   <img src="logo.png" alt="Euphoric Christmas" />
+
         </div>
+<nav>
+  <a href="#cover">Home</a>
+  <a href="#produits">Christmas Invitations</a>
+  <a href="#chanson">The Song</a>
+  <a href="#clip">Music Video</a>
+</nav>
       </div>
     </header>
 
-    <!-- SECTION COVER AVEC COMPTEUR (section 1) -->
+    <!-- SECTION COVER -->
     <section id="cover">
-      <!-- id pour animation BOOM -->
-      <div class="cover-content" id="coverBox">
+      <div class="cover-content">
         <div class="cover-inner">
-          <div>
-<img src="LOGO (2).png" alt="Euphoric Christmas" class="hero-logo">
-            <p class="hero-subtitle" id="hero-label">Release in:</p>
+          <img
+            src="echarpe-texte.png"
+            alt="Écharpe de Noël avec citation"
+            class="cover-image"
+          >
+          <a href="#produits" class="cover-btn-green">
+           Invite your loved ones
+          </a>
+        </div>
+      </div>
+    </section>
 
-            <!-- ✅ compteur normal -->
-            <div class="hero-countdown" id="countdown-normal">
-              <div class="hero-countdown-item">
-                <span class="value" id="cd-days">0</span>
-                <span class="label">Days</span>
-              </div>
-              <div class="hero-countdown-item">
-                <span class="value" id="cd-hours">0</span>
-                <span class="label">Hours</span>
-              </div>
-              <div class="hero-countdown-item">
-                <span class="value" id="cd-mins">0</span>
-                <span class="label">Minutes</span>
-              </div>
-              <div class="hero-countdown-item">
-                <span class="value" id="cd-secs">0</span>
-                <span class="label">Seconds</span>
-              </div>
-            </div>
+    <!-- SECTION INVITATIONS -->
+    <section id="produits">
+      <div class="container inner">
+        <img
+          src="banniere-produits.png"
+          alt="Christmas décor for the shop"
+          class="produits-header-image"
+        >
 
-            <!-- 🔟 gros 10, 9, 8... -->
-            <div class="hero-final" id="final-countdown">10</div>
-          </div>
+        <h2 class="produits-title">Christmas Invitations</h2>
+<p style="text-align:center; max-width:700px; margin:0 auto 20px; font-size:0.95rem;">
+  Create and personalize your own Christmas party invitations inspired by our song
+  <strong>“Euphoric Christmas”</strong>. Choose a design, edit the details and share it
+  with your friends and family – it’s completely free.
+</p>
+
+        <div class="carousel-wrapper">
+        <div class="carousel">
+  <!-- flèche gauche -->
+  <button type="button" class="carousel-arrow left" onclick="prevSlide()">&#10094;</button>
+
+  <!-- Invitation 1 -->
+  <a href="#" onclick="openInvitation('invitation.html'); return false;">
+    <img class="slide active" src="invitation-christmas1 .png" alt="Invitation 1">
+  </a>
+
+  <!-- Invitation 2 -->
+  <a href="#" onclick="openInvitation('invitation2.html'); return false;">
+    <img class="slide" src="invitation-christmas2.png" alt="Invitation 2">
+  </a>
+
+  <!-- Invitation 3 -->
+  <a href="#" onclick="openInvitation('invitation3.html'); return false;">
+    <img class="slide" src="invitation-christmas3.png" alt="Invitation 3">
+  </a>
+
+  <!-- Invitation 4 -->
+  <a href="#" onclick="openInvitation('invitation4.html'); return false;">
+    <img class="slide" src="invitation-christmas4.png" alt="Invitation 4">
+  </a>
+
+  <!-- flèche droite -->
+  <button type="button" class="carousel-arrow right" onclick="nextSlide()">&#10095;</button>
+</div>
+
 
         </div>
       </div>
     </section>
 
+    <!-- SECTION CHANSON AUDIO -->
+   <section id="chanson">
+  <div class="container inner">
+    <h2>Listen to the song</h2>
+    <p>“Euphoric Christmas” is our original holiday song, created to bring warmth,
+  joy and a touch of magic to your celebrations. Hit play and let the mood begin.
+</p>
+
+    <!-- UN SEUL audio : il sert de background ET de lecteur avec barre de progression -->
+    <audio id="bg-music" src="euphoric.mp4" controls autoplay loop>
+      Votre navigateur ne supporte pas la lecture audio.
+    </audio>
+  </div>
+</section>
+
+
+    <!-- SECTION CLIP -->
+    <section id="clip">
+      <div class="container inner">
+        <h2>🎬 Official music video</h2>
+        <p> Step into the world of “Euphoric Christmas”. Watch the official music video
+  and feel the festive atmosphere that inspired our free invitations.</p>
+
+        <div class="clip-grid">
+          <div>
+            <video src="clip.mp4" controls autoplay muted loop></video>
+            <div class="stream-buttons">
+              <a href="#">Spotify</a>
+              <a href="#">Apple Music</a>
+              <a href="#">YouTube</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 OMHY Entertainment – All rights reserved
+    </footer>
+  </div>
+
+ <!-- 🔹 "Page 2" = invitation plein écran -->
+<div id="page2" class="hidden">
+  <button
+    type="button"
+    class="back-btn"
+    onclick="backToMain()"
+  >
+    ← Back 
+  </button>
+
+  <iframe
+    id="invitationFrame"
+    src=""
+  ></iframe>
+</div>
+
   </div>
 
   <script>
-    // 🕒 Date de sortie (à changer si besoin)
-    const releaseDate = new Date('2025-11-22T12:44:30');
+    // Slider produits : affiche une slide à la fois
+    const slides = document.querySelectorAll('#produits .carousel .slide');
+    let currentIndex = 0;
 
-    const daysEl    = document.getElementById('cd-days');
-    const hoursEl   = document.getElementById('cd-hours');
-    const minsEl    = document.getElementById('cd-mins');
-    const secsEl    = document.getElementById('cd-secs');
-    const heroLabel = document.getElementById('hero-label');
-    const coverBox  = document.getElementById('coverBox');
-
-    const normalCountdown = document.getElementById('countdown-normal');
-    const finalCountdown  = document.getElementById('final-countdown');
-
-    let boomTriggered = false;
-    let timerId = null;
-
-    function triggerBoom() {
-      if (boomTriggered) return;
-      boomTriggered = true;
-
-      // Texte BOOM
-      if (heroLabel) {
-        heroLabel.textContent = 'BOOM! 🎉 EuphoricChristmas is out!';
-        heroLabel.classList.add('boom-text');
-      }
-
-      // Animation sur la carte
-      if (coverBox) {
-        coverBox.classList.add('boom-effect');
-      }
-
-      // Arrêter le compteur
-      if (timerId) {
-        clearInterval(timerId);
-      }
-
-      // ⏱️ Après 2 secondes, redirection (change le nom du fichier si besoin)
-      setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 2000);
+    function showSlide(index) {
+      slides.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
     }
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = releaseDate - now;
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }
 
-      if (diff <= 0) {
-        // Fin du compte à rebours
-        daysEl.textContent  = 0;
-        hoursEl.textContent = '00';
-        minsEl.textContent  = '00';
-        secsEl.textContent  = '00';
+    if (slides.length > 0) {
+      showSlide(currentIndex);
+      setInterval(nextSlide, 3000);
+    }
 
-        triggerBoom();
-        return;
+    // Musique : autoriser après un clic utilisateur
+    const bgMusic = document.getElementById('bg-music');
+    document.addEventListener('click', () => {
+      if (bgMusic) {
+        bgMusic.play().catch(() => {});
       }
+    }, { once: true });
 
-      const totalSeconds = Math.floor(diff / 1000);
+    // Ouvrir une invitation dans la "page 2"
+    function openInvitation(url) {
+      const page1 = document.getElementById('page1');
+      const page2 = document.getElementById('page2');
+      const frame = document.getElementById('invitationFrame');
 
-      const days  = Math.floor(totalSeconds / (3600 * 24));
-      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-      const mins  = Math.floor((totalSeconds % 3600) / 60);
-      const secs  = totalSeconds % 60;
-
-      // Pour > 10 secondes : affichage normal
-      if (totalSeconds > 10) {
-        if (normalCountdown) normalCountdown.style.display = 'flex';
-        if (finalCountdown)  finalCountdown.style.display  = 'none';
-
-        daysEl.textContent  = days;
-        hoursEl.textContent = hours.toString().padStart(2, '0');
-        minsEl.textContent  = mins.toString().padStart(2, '0');
-        secsEl.textContent  = secs.toString().padStart(2, '0');
-      } else {
-        // 🔟 Dernières secondes : gros 10, 9, 8...
-        if (normalCountdown) normalCountdown.style.display = 'none';
-        if (finalCountdown)  {
-          finalCountdown.style.display  = 'block';
-          finalCountdown.textContent = secs; // 10,9,8,…
-        }
-
-        // Option : changer le texte au-dessus
-        if (heroLabel) {
-          heroLabel.textContent = 'Get ready...';
-        }
+      if (page1 && page2 && frame) {
+        page1.classList.add('hidden');
+        page2.classList.remove('hidden');
+        frame.src = url;   // charge invitation.html, invitation2.html, etc.
       }
     }
 
-    updateCountdown();
-    timerId = setInterval(updateCountdown, 1000);
+    // Revenir au site principal
+    function backToMain() {
+      const page1 = document.getElementById('page1');
+      const page2 = document.getElementById('page2');
+      const frame = document.getElementById('invitationFrame');
+
+      if (page1 && page2 && frame) {
+        frame.src = '';
+        page2.classList.add('hidden');
+        page1.classList.remove('hidden');
+      }
+    }
   </script>
+
 </body>
 </html>
