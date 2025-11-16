@@ -33,6 +33,21 @@
       margin: 0 auto;
       padding: 0 20px;
     }
+.brand img {
+  height: 56px;          /* taille du logo */
+  width: auto;
+  border-radius: 12px;   /* coins arrondis */
+  object-fit: cover;
+  display: block;
+
+  /* ⭐ Bordure blanche autour de l'image */
+  border: 3px solid  #f0e8dd;
+
+  /* Optionnel : légère ombre pour que ça ressorte mieux */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+
 
     /* Pour cacher/afficher les "pages" */
     .hidden {
@@ -408,7 +423,8 @@
     <header>
       <div class="nav-inner">
         <div class="brand">
-          EUPHORICHRISTMAS
+                   <img src="logo.png" alt="Euphoric Christmas" />
+
         </div>
 <nav>
   <a href="#cover">Home</a>

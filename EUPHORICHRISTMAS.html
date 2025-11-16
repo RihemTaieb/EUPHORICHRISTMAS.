@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EUPHORICHRISTMAS</title>
+
+  <style>
+    :root {
+      --beige: #e6ddcf;
+      --rouge: #a72929;
+      --rose: #ff0055;
+      --violet: #6600ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #222;
+      background-color: var(--beige);
+      overflow-x: hidden;
+    }
+
+    section {
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #page2 {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+    }
+
+    #invitationFrame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    #page2 .back-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      z-index: 1000;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #a72929;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* === NAVBAR ROUGE #a72929 === */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--rouge);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .brand img {
+      height: 56px;
+      width: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+      border: 3px solid #f0e8dd;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    .brand .dot {
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    nav a {
+      margin-left: 18px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    /* === SECTION COVER : image de fond + bloc blanc === */
+    #cover {
+      min-height: 100vh;
+      background: url("Design sans titre (4).png") center top no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 160px 20px;
+      text-align: center;
+    }
+
+    .cover-content {
+      background: rgba(255, 255, 255, 0.85);
+      width: min(400px, 95vw);
+      aspect-ratio: 4 / 3;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulseBox 2.5s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .cover-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+    }
+
+    /* ✅ Bloc compte à rebours dans la section 1 */
+    .hero-title {
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .hero-subtitle {
+      margin: 4px 0 12px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .hero-countdown {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-countdown-item {
+      background: rgb(3 57 4 / 10%);
+      border-radius: 12px;
+      padding: 6px 10px;
+      min-width: 55px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .hero-countdown-item span.value {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-countdown-item span.label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* 👉 GROS 10, 9, 8... pour les 10 dernières secondes */
+    .hero-final {
+      display: none;
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #a72929;
+    }
+
+    .cover-btn-green {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: #3d6a48;
+      color: #fff;
+      font-size: 0.95rem;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+
+    .cover-btn-green:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes pulseBox {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    /* 🔥 ANIMATION BOOM */
+    @keyframes boomFlash {
+      0%   { transform: scale(1);   background-color: rgba(255, 255, 255, 0.85); }
+      25%  { transform: scale(1.05); background-color: #ffe5e5; }
+      50%  { transform: scale(0.98); background-color: #ffffff; }
+      75%  { transform: scale(1.04); background-color: #ffe5e5; }
+      100% { transform: scale(1);   background-color: rgba(255, 255, 255, 0.85); }
+    }
+
+    @keyframes boomShake {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .boom-effect {
+      animation:
+        boomFlash 0.8s ease-out 0s 2,
+        boomShake 0.4s ease-in-out 0.1s 2;
+    }
+
+    .boom-text {
+      color: #a72929;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner {
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 12px;
+      }
+    }
+    .hero-logo {
+  width: 250px;             /* Taille idéale (tu peux changer) */
+  max-width: 88%;           /* Pour éviter qu’elle déborde sur petit écran */
+  height: auto;             /* Proportions conservées */
+  display: block;
+  margin: 0 auto 10px auto; /* Centre + espace sous l'image */
+  
+  border-radius: 16px;      /* Coins arrondis (modifie si tu veux plus/moins) */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* Ombre élégante */
+        border: 3px solid #3d6a48;
+
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- 🔹 "Page 1" = ton site -->
+  <div id="page1">
+
+    <!-- NAVBAR -->
+    <header>
+      <div class="nav-inner">
+        <div class="brand">
+          <img src="logo.png" alt="Euphoric Christmas" />
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION COVER AVEC COMPTEUR (section 1) -->
+    <section id="cover">
+      <!-- id pour animation BOOM -->
+      <div class="cover-content" id="coverBox">
+        <div class="cover-inner">
+          <div>
+<img src="LOGO (2).png" alt="Euphoric Christmas" class="hero-logo">
+            <p class="hero-subtitle" id="hero-label">Release in:</p>
+
+            <!-- ✅ compteur normal -->
+            <div class="hero-countdown" id="countdown-normal">
+              <div class="hero-countdown-item">
+                <span class="value" id="cd-days">0</span>
+                <span class="label">Days</span>
+              </div>
+              <div class="hero-countdown-item">
+                <span class="value" id="cd-hours">0</span>
+                <span class="label">Hours</span>
+              </div>
+              <div class="hero-countdown-item">
+                <span class="value" id="cd-mins">0</span>
+                <span class="label">Minutes</span>
+              </div>
+              <div class="hero-countdown-item">
+                <span class="value" id="cd-secs">0</span>
+                <span class="label">Seconds</span>
+              </div>
+            </div>
+
+            <!-- 🔟 gros 10, 9, 8... -->
+            <div class="hero-final" id="final-countdown">10</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // 🕒 Date de sortie (à changer si besoin)
+    const releaseDate = new Date('2025-11-22T12:44:30');
+
+    const daysEl    = document.getElementById('cd-days');
+    const hoursEl   = document.getElementById('cd-hours');
+    const minsEl    = document.getElementById('cd-mins');
+    const secsEl    = document.getElementById('cd-secs');
+    const heroLabel = document.getElementById('hero-label');
+    const coverBox  = document.getElementById('coverBox');
+
+    const normalCountdown = document.getElementById('countdown-normal');
+    const finalCountdown  = document.getElementById('final-countdown');
+
+    let boomTriggered = false;
+    let timerId = null;
+
+    function triggerBoom() {
+      if (boomTriggered) return;
+      boomTriggered = true;
+
+      // Texte BOOM
+      if (heroLabel) {
+        heroLabel.textContent = 'BOOM! 🎉 EuphoricChristmas is out!';
+        heroLabel.classList.add('boom-text');
+      }
+
+      // Animation sur la carte
+      if (coverBox) {
+        coverBox.classList.add('boom-effect');
+      }
+
+      // Arrêter le compteur
+      if (timerId) {
+        clearInterval(timerId);
+      }
+
+      // ⏱️ Après 2 secondes, redirection (change le nom du fichier si besoin)
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 2000);
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = releaseDate - now;
+
+      if (diff <= 0) {
+        // Fin du compte à rebours
+        daysEl.textContent  = 0;
+        hoursEl.textContent = '00';
+        minsEl.textContent  = '00';
+        secsEl.textContent  = '00';
+
+        triggerBoom();
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+
+      const days  = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const mins  = Math.floor((totalSeconds % 3600) / 60);
+      const secs  = totalSeconds % 60;
+
+      // Pour > 10 secondes : affichage normal
+      if (totalSeconds > 10) {
+        if (normalCountdown) normalCountdown.style.display = 'flex';
+        if (finalCountdown)  finalCountdown.style.display  = 'none';
+
+        daysEl.textContent  = days;
+        hoursEl.textContent = hours.toString().padStart(2, '0');
+        minsEl.textContent  = mins.toString().padStart(2, '0');
+        secsEl.textContent  = secs.toString().padStart(2, '0');
+      } else {
+        // 🔟 Dernières secondes : gros 10, 9, 8...
+        if (normalCountdown) normalCountdown.style.display = 'none';
+        if (finalCountdown)  {
+          finalCountdown.style.display  = 'block';
+          finalCountdown.textContent = secs; // 10,9,8,…
+        }
+
+        // Option : changer le texte au-dessus
+        if (heroLabel) {
+          heroLabel.textContent = 'Get ready...';
+        }
+      }
+    }
+
+    updateCountdown();
+    timerId = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>

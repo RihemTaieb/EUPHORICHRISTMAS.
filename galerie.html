@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EUPHORICHRISTMAS</title>
+
+  <style>
+    :root {
+      --beige: #e6ddcf;
+      --rouge: #a72929;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #222;
+      background-color: var(--beige);
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR simple */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--rouge);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: bold;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    /* === SECTION COVER : image visible en entier + compteur par-dessus === */
+    #cover {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cover-wrapper {
+      position: relative;
+      max-width: 800px;   /* largeur max de l'image */
+      width: 100%;
+    }
+
+    /* 👉 TON IMAGE, on la voit en entier */
+    .cover-bg-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Carte compteur par-dessus l'image */
+    .cover-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      width: min(320px, 80%);
+      border-radius: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 16px;
+      text-align: center;
+      transform-origin: center;
+    }
+
+    .cover-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hero-title {
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .hero-subtitle {
+      margin: 4px 0 8px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .hero-countdown {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-countdown-item {
+      background: rgb(3 57 4 / 10%);
+      border-radius: 12px;
+      padding: 6px 10px;
+      min-width: 55px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .hero-countdown-item span.value {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-countdown-item span.label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .cover-btn-green {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: #3d6a48;
+      color: #fff;
+      font-size: 0.95rem;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+
+    .cover-btn-green:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 🔥 ANIMATION BOOM */
+    @keyframes boomFlash {
+      0%   { transform: scale(1);   background-color: rgba(255, 255, 255, 0.9); }
+      25%  { transform: scale(1.05); background-color: #ffe5e5; }
+      50%  { transform: scale(0.98); background-color: #ffffff; }
+      75%  { transform: scale(1.04); background-color: #ffe5e5; }
+      100% { transform: scale(1);   background-color: rgba(255, 255, 255, 0.9); }
+    }
+
+    @keyframes boomShake {
+      0% { transform: translate(-50%, -50%) translateX(0); }
+      20% { transform: translate(-50%, -50%) translateX(-6px); }
+      40% { transform: translate(-50%, -50%) translateX(6px); }
+      60% { transform: translate(-50%, -50%) translateX(-4px); }
+      80% { transform: translate(-50%, -50%) translateX(4px); }
+      100% { transform: translate(-50%, -50%) translateX(0); }
+    }
+
+    .boom-effect {
+      animation:
+        boomFlash 0.8s ease-out 0s 2,
+        boomShake 0.4s ease-in-out 0.1s 2;
+    }
+
+    .boom-text {
+      color: #a72929;
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+      .cover-content {
+        width: 85%;
+        padding: 14px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="brand">EUPHORICHRISTMAS</div>
+    </div>
+  </header>
+
+  <!-- SECTION COVER -->
+  <section id="cover">
+    <div class="cover-wrapper">
+      <!-- 🖼️ TON IMAGE DE FOND, visible en entier -->
+      <img
+        src="Votre texte de paragraphe.png"
+        alt="Fond décoré Euphoric Christmas"
+        class="cover-bg-img"
+      >
+
+     
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  
+</body>
+</html>
