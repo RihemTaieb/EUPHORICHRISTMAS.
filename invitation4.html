@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  
   <title>Invitation Noël personnalisée</title>
 
   <style>
@@ -18,60 +17,168 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     }
 
-.form-wrapper {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px 24px;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    /* --- CARTE --- */
+    .card-wrapper {
+      position: relative;
+      width: min(1100px, 95vw);
+      aspect-ratio: 928 / 410; /* adapte au ratio de ton image */
+      background: url("invitation-christmas4.png") center center no-repeat;
+      background-size: contain;
+    }
 
-  display: grid;
-  grid-template-columns: repeat(3, minmax(180px, 1fr));
-  gap: 12px 20px;
-  align-items: flex-start;
-}
+    .card-text {
+      position: absolute;
+      color: #a3870e;
+      font-family: "Morva", monospace;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
 
-.form-header {
-  grid-column: 1 / -1;
-  text-align: center;
-  margin-bottom: 8px;
-}
+    .date-text {
+      top: 40%;
+      left: 52%;
+      font-size: 14px;
+      white-space: pre-line;
+      text-align: center;
+    }
 
-.customization-title {
-  margin: 0 0 4px;
-  font-size: 1.3rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
+    .time-text {
+      top: 63%;
+      left: 52%;
+      font-size: 14px;
+      white-space: pre-line;
+      text-align: center;
+    }
 
-.customization-subtitle {
-  margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
+    /* Emplacement multi-lignes, centré */
+    .place-text {
+      top: 63%;
+      left: 72%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      max-width: 60%;
+      white-space: pre-line;
+      text-align: center;
+    }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
-}
+    /* 🔘 Bouton pour ouvrir/fermer le formulaire (sans changer le layout) */
+    .toggle-form-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      border: none;
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: rgba(167, 41, 41, 0.9);
+      color: #fff;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
 
-.form-group label {
-  margin-bottom: 4px;
-  font-weight: 600;
-}
+    .toggle-form-btn:hover {
+      opacity: 0.9;
+    }
 
-/* Location sur toute la largeur */
-.form-group.location-group {
-  grid-column: 1 / -1;
-}
+    /* 🔙 Bouton BACK avec le même style mais à gauche */
+    .back-btn {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      border: none;
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: rgba(167, 41, 41, 0.9);
+      color: #fff;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
 
-/* Responsive */
-@media (max-width: 800px) {
-  .form-wrapper {
-    grid-template-columns: 1fr;
-  }
-}
+    .back-btn:hover {
+      opacity: 0.9;
+    }
 
+    /* --- FORMULAIRE EN OVERLAY (MODALE) --- */
+    .form-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;              /* caché par défaut */
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .form-overlay.active {
+      display: flex;
+    }
+
+    .form-wrapper {
+      background: rgba(255, 255, 255, 0.97);
+      padding: 20px 24px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 12px 20px;
+      align-items: flex-start;
+      width: min(900px, 95vw);
+      max-height: 90vh;
+      overflow: auto;
+    }
+
+    .form-header {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .customization-title {
+      margin: 0 0 4px;
+      font-size: 1.3rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .customization-subtitle {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+    }
+
+    .form-group label {
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    /* Location sur toute la largeur */
+    .form-group.location-group {
+      grid-column: 1 / -1;
+    }
+
+    /* Groupe pour le lien sur toute la largeur */
+    .form-group.share-group {
+      grid-column: 1 / -1;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .form-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
 
     .form-group input,
     .form-group textarea {
@@ -87,7 +194,7 @@
       min-height: 48px;
     }
 
-    /* --- ZONE PARTAGE --- */
+    /* --- ZONE PARTAGE (dans le formulaire) --- */
     .share-wrapper {
       background: rgba(255, 255, 255, 0.95);
       padding: 10px 14px;
@@ -96,7 +203,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      max-width: 90vw;
+      max-width: 100%;
     }
 
     .share-wrapper button {
@@ -118,187 +225,73 @@
       border: none;
       outline: none;
       font-size: 0.8rem;
-      min-width: 260px;
-      max-width: 60vw;
+      min-width: 0;
+      flex: 1;
       background: transparent;
     }
 
-    /* --- CARTE --- */
-    .card-wrapper {
-      position: relative;
-      width: min(1100px, 95vw);
-      aspect-ratio: 928 / 410; /* adapte au ratio de ton image */
-      background: url("invitation-christmas4.png") center center no-repeat;
-      background-size: contain;
+    /* 🔗 Réseaux sociaux sous le lien */
+    .social-share {
+      margin-top: 8px;
+      display: none;          /* caché au début */
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
     }
 
-.card-text {
-  position: absolute;
-  color: #a3870e;
-  font-family: "Morva", monospace;
-  letter-spacing: 0.08em;
-  font-weight: 700;   /* ou bold */
-}
-
-
-    .date-text {
-      top: 40%;
-      left: 52%;
-      font-size: 14px;
-      white-space:  pre-line;
-            text-align: center;
-
+    .social-share span {
+      font-weight: 600;
     }
 
-    .time-text {
-      top: 63%;
-      left: 52%;
-      font-size: 14px;
-      white-space:  pre-line;
-            text-align: center;
-
+    .social-share a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #a72929;
+      text-decoration: none;
+      font-size: 0.8rem;
+      cursor: pointer;
     }
 
-    /* Emplacement multi-lignes, centré */
-    .place-text {
-      top: 63%;
-      left: 72%;                 /* centre horizontalement */
-      transform: translateX(-50%);
-      font-size: 12px;
-      max-width: 60%;
-      white-space: pre-line;      /* respecte les \n */
-      text-align: center;
+    .social-share a:hover {
+      background: #a72929;
+      color: #fff;
     }
 
-    /* ✅ Mode "vue partagée" : on cache les inputs + partage */
-    body.view-only .form-wrapper,
-    body.view-only .share-wrapper {
-      display: none;
+    /* Bloc audio sous la carte – visible pour tout le monde */
+    .audio-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
     }
 
-    @media (max-width: 900px) {
-      .form-wrapper {
-        gap: 10px 10px;
-      }
+    .audio-wrapper h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
     }
-    /* Bloc audio sous la carte – caché par défaut */
-.audio-wrapper {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-}
 
-.audio-wrapper h3 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-}
+    .audio-wrapper audio {
+      width: min(400px, 80vw);
+      border-radius: 8px;
+    }
 
-.audio-wrapper audio {
-  width: min(400px, 80vw);
-  border-radius: 8px;
-}
+    /* Lien vers la chanson (YouTube / Spotify...) */
+    .song-link {
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: #a72929;
+      font-weight: 600;
+    }
 
-/* Lien vers la chanson (YouTube / Spotify...) */
-.song-link {
-  font-size: 0.9rem;
-  text-decoration: none;
-  color: #a72929;
-  font-weight: 600;
-}
-
-.song-link:hover {
-  text-decoration: underline;
-}
-
-/* ✅ Mode "vue partagée" : on cache les inputs + partage, et on AFFICHE l'audio */
-body.view-only .form-wrapper,
-body.view-only .share-wrapper {
-  display: none;
-}
-
-body.view-only .audio-wrapper {
-  display: flex;
-}
-
+    .song-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-
-  <!-- CUSTOMIZATION FORM -->
-<div class="form-wrapper">
-  <div class="form-header">
-    <h2 class="customization-title">
-      Customize your invitation
-    </h2>
-    <p class="customization-subtitle">
-      Edit the date, time and location so the card matches your event.
-    </p>
-  </div>
-
-  <!-- DATE -->
-  <div class="form-group">
-    <label for="dateInput">Date</label>
-    <textarea
-      id="dateInput"
-      placeholder="SAT&#10;12/24"
-    ></textarea>
-  </div>
-  <div class="form-group">
-    <label for="dateTopInput">Date – Vertical position (%)</label>
-    <input id="dateTopInput" type="number" min="0" max="100" step="0.5" value="40" />
-  </div>
-  <div class="form-group">
-    <label for="dateLeftInput">Date – Horizontal position (%)</label>
-    <input id="dateLeftInput" type="number" min="0" max="100" step="0.5" value="52" />
-  </div>
-
-  <!-- TIME -->
-  <div class="form-group">
-    <label for="timeInput">Time</label>
-    <textarea
-      id="timeInput"
-      placeholder="FROM&#10;5P–8P"
-    ></textarea>
-  </div>
-  <div class="form-group">
-    <label for="timeTopInput">Time – Vertical position (%)</label>
-    <input id="timeTopInput" type="number" min="0" max="100" step="0.5" value="63" />
-  </div>
-  <div class="form-group">
-    <label for="timeLeftInput">Time – Horizontal position (%)</label>
-    <input id="timeLeftInput" type="number" min="0" max="100" step="0.5" value="52" />
-  </div>
-
-  <!-- LOCATION -->
-  <div class="form-group location-group">
-    <label for="placeInput">Location (line breaks allowed)</label>
-    <textarea
-      id="placeInput"
-      placeholder="123 CHRISTMAS STREET&#10;PARIS, FRANCE"
-    ></textarea>
-  </div>
-  <div class="form-group">
-    <label for="placeTopInput">Location – Vertical position (%)</label>
-    <input id="placeTopInput" type="number" min="0" max="100" step="0.5" value="63" />
-  </div>
-  <div class="form-group">
-    <label for="placeLeftInput">Location – Horizontal position (%)</label>
-    <input id="placeLeftInput" type="number" min="0" max="100" step="0.5" value="72" />
-  </div>
-</div>
-
-
-  <!-- BOUTON + LIEN DE PARTAGE -->
-<div class="share-wrapper">
-  <button id="generateLinkBtn" type="button">
-    Générer le lien à partager
-  </button>
-  <input id="shareLink" type="text" readonly placeholder="Le lien apparaîtra ici" />
-</div>
-
 
   <!-- CARTE D'INVITATION -->
   <div class="card-wrapper">
@@ -316,10 +309,19 @@ body.view-only .audio-wrapper {
       123 CHRISTMAS STREET
       PARIS, FRANCE
     </div>
+
+    <!-- 🔙 Bouton BACK (comme personnaliser, mais à gauche) -->
+    <button id="backBtn" class="back-btn">
+      ← Back
+    </button>
+
+    <!-- 🔘 Bouton pour ouvrir/fermer le formulaire -->
+    <button id="toggleFormBtn" class="toggle-form-btn">
+      ✏️ Personnaliser
+    </button>
   </div>
 
-
-  <!-- AUDIO + LIEN CHANSON (uniquement en mode lien partagé) -->
+  <!-- AUDIO + LIEN CHANSON -->
   <div class="audio-wrapper">
     <h3>Listen to "Euphoric Christmas"</h3>
 
@@ -337,11 +339,90 @@ body.view-only .audio-wrapper {
     </a>
   </div>
 
+  <!-- 🧾 FORMULAIRE EN OVERLAY (modale) -->
+  <div class="form-overlay" id="formOverlay">
+    <div class="form-wrapper">
+      <div class="form-header">
+        <h2 class="customization-title">
+          Customize your invitation
+        </h2>
+        <p class="customization-subtitle">
+          Edit the date, time and location so the card matches your event.
+        </p>
+      </div>
+
+      <!-- DATE -->
+      <div class="form-group">
+        <label for="dateInput">Date</label>
+        <textarea
+          id="dateInput"
+          placeholder="SAT&#10;12/24"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="dateTopInput">Date – Vertical position (%)</label>
+        <input id="dateTopInput" type="number" min="0" max="100" step="0.5" value="40" />
+      </div>
+      <div class="form-group">
+        <label for="dateLeftInput">Date – Horizontal position (%)</label>
+        <input id="dateLeftInput" type="number" min="0" max="100" step="0.5" value="52" />
+      </div>
+
+      <!-- TIME -->
+      <div class="form-group">
+        <label for="timeInput">Time</label>
+        <textarea
+          id="timeInput"
+          placeholder="FROM&#10;5P–8P"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="timeTopInput">Time – Vertical position (%)</label>
+        <input id="timeTopInput" type="number" min="0" max="100" step="0.5" value="63" />
+      </div>
+      <div class="form-group">
+        <label for="timeLeftInput">Time – Horizontal position (%)</label>
+        <input id="timeLeftInput" type="number" min="0" max="100" step="0.5" value="52" />
+      </div>
+
+      <!-- LOCATION -->
+      <div class="form-group location-group">
+        <label for="placeInput">Location (line breaks allowed)</label>
+        <textarea
+          id="placeInput"
+          placeholder="123 CHRISTMAS STREET&#10;PARIS, FRANCE"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="placeTopInput">Location – Vertical position (%)</label>
+        <input id="placeTopInput" type="number" min="0" max="100" step="0.5" value="63" />
+      </div>
+      <div class="form-group">
+        <label for="placeLeftInput">Location – Horizontal position (%)</label>
+        <input id="placeLeftInput" type="number" min="0" max="100" step="0.5" value="72" />
+      </div>
+
+      <!-- 🔗 BLOC LIEN DANS LE FORMULAIRE -->
+      <div class="form-group share-group">
+        <label for="shareLink">Shareable link</label>
+<div class="share-wrapper">
+  <button id="generateLinkBtn" type="button">
+    Generate share link
+  </button>
+  <input id="shareLink" type="text" readonly placeholder="The link will appear here" />
+</div>
+
+        <!-- ⭐ Réseaux sociaux, cachés au début -->
+      
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Inputs
     const dateInput      = document.getElementById('dateInput');
-    const timeInput      = document.getElementElementById?.('timeInput') || document.getElementById('timeInput');
+    const timeInput      = document.getElementById('timeInput');
     const placeInput     = document.getElementById('placeInput');
 
     const dateTopInput   = document.getElementById('dateTopInput');
@@ -356,9 +437,18 @@ body.view-only .audio-wrapper {
     const timeText  = document.getElementById('timeText');
     const placeText = document.getElementById('placeText');
 
-    // Partage
+    // Partage & affichage
     const generateLinkBtn = document.getElementById('generateLinkBtn');
     const shareLinkInput  = document.getElementById('shareLink');
+    const formOverlay     = document.getElementById('formOverlay');
+    const toggleFormBtn   = document.getElementById('toggleFormBtn');
+    const backBtn         = document.getElementById('backBtn');
+
+    // Réseaux sociaux
+    const socialShare     = document.getElementById('socialShare');
+    const shareWhatsapp   = document.getElementById('shareWhatsapp');
+    const shareFacebook   = document.getElementById('shareFacebook');
+    const shareEmail      = document.getElementById('shareEmail');
 
     // Valeurs par défaut
     const defaultDate      = 'SAT \n12/24';
@@ -414,7 +504,7 @@ body.view-only .audio-wrapper {
     placeTopInput.addEventListener('input', updateCardFromInputs);
     placeLeftInput.addEventListener('input', updateCardFromInputs);
 
-    // 🔁 On remplit les inputs à partir de l'URL
+    // 🔁 Initialisation depuis l'URL (si quelqu'un ouvre un lien déjà généré)
     function initFromURL() {
       const params = new URLSearchParams(window.location.search);
 
@@ -429,31 +519,24 @@ body.view-only .audio-wrapper {
       const urlPlaceTop  = params.get('placeTop');
       const urlPlaceLeft = params.get('placeLeft');
 
-      let hasParams = false;
+      if (urlDate)      dateInput.value      = urlDate;
+      if (urlTime)      timeInput.value      = urlTime;
+      if (urlPlace)     placeInput.value     = urlPlace;
 
-      if (urlDate)  { dateInput.value  = urlDate;  hasParams = true; }
-      if (urlTime)  { timeInput.value  = urlTime;  hasParams = true; }
-      if (urlPlace) { placeInput.value = urlPlace; hasParams = true; }
-
-      if (urlDateTop)  { dateTopInput.value  = urlDateTop;  hasParams = true; }
-      if (urlDateLeft) { dateLeftInput.value = urlDateLeft; hasParams = true; }
-      if (urlTimeTop)  { timeTopInput.value  = urlTimeTop;  hasParams = true; }
-      if (urlTimeLeft) { timeLeftInput.value = urlTimeLeft; hasParams = true; }
-      if (urlPlaceTop) { placeTopInput.value = urlPlaceTop; hasParams = true; }
-      if (urlPlaceLeft){ placeLeftInput.value= urlPlaceLeft;hasParams = true; }
+      if (urlDateTop)   dateTopInput.value   = urlDateTop;
+      if (urlDateLeft)  dateLeftInput.value  = urlDateLeft;
+      if (urlTimeTop)   timeTopInput.value   = urlTimeTop;
+      if (urlTimeLeft)  timeLeftInput.value  = urlTimeLeft;
+      if (urlPlaceTop)  placeTopInput.value  = urlPlaceTop;
+      if (urlPlaceLeft) placeLeftInput.value = urlPlaceLeft;
 
       updateCardFromInputs();
-
-      // Si on a des paramètres → mode vue partagée (cache la personnalisation)
-      if (hasParams) {
-        document.body.classList.add('view-only');
-      }
     }
 
     initFromURL();
 
-    // 🔗 Génération du lien à partager
-    generateLinkBtn.addEventListener('click', () => {
+    // 🔗 Construction de l'URL à partager
+    function buildShareUrl() {
       const baseUrl = window.location.origin + window.location.pathname;
 
       const params = new URLSearchParams();
@@ -472,49 +555,57 @@ body.view-only .audio-wrapper {
         ? `${baseUrl}?${params.toString()}`
         : baseUrl;
 
+      return fullUrl;
+    }
+
+    // 🔘 Générer le lien + partage natif si possible
+    generateLinkBtn.addEventListener('click', async () => {
+      const fullUrl = buildShareUrl();
+
+      // On met le lien dans le champ
       shareLinkInput.value = fullUrl;
       shareLinkInput.select();
+
+      // On essaie de copier dans le presse-papier
+      try {
+        document.execCommand('copy');
+      } catch (e) {
+        console.log('Copie impossible', e);
+      }
+
+      // 📱 Menu de partage natif si disponible
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'Invitation de Noël',
+            text: 'Viens à ma soirée de Noël 🎄',
+            url: fullUrl,
+          });
+        } catch (err) {
+          console.log('Partage annulé ou impossible', err);
+        }
+      } else {
+        alert("Le lien a été généré et copié. Collez-le dans WhatsApp, Instagram, etc. pour le partager.");
+      }
     });
 
-    // Initialisation de la carte avec les valeurs par défaut
-    updateCardFromInputs();
-    generateLinkBtn.addEventListener('click', () => {
-  const baseUrl = window.location.origin + window.location.pathname;
+    // 🔘 Toggle formulaire (overlay)
+    toggleFormBtn.addEventListener('click', () => {
+      formOverlay.classList.toggle('active');
+    });
 
-  const params = new URLSearchParams();
-  if (dateInput.value)      params.set('date',      dateInput.value);
-  if (timeInput.value)      params.set('time',      timeInput.value);
-  if (placeInput.value)     params.set('place',     placeInput.value);
-  if (dateTopInput.value)   params.set('dateTop',   dateTopInput.value);
-  if (dateLeftInput.value)  params.set('dateLeft',  dateLeftInput.value);
-  if (timeTopInput.value)   params.set('timeTop',   timeTopInput.value);
-  if (timeLeftInput.value)  params.set('timeLeft',  timeLeftInput.value);
-  if (placeTopInput.value)  params.set('placeTop',  placeTopInput.value);
-  if (placeLeftInput.value) params.set('placeLeft', placeLeftInput.value);
+    // 🔙 Bouton back
+    backBtn.addEventListener('click', () => {
+      window.history.back();
+    });
 
-  const fullUrl = params.toString()
-    ? `${baseUrl}?${params.toString()}`
-    : baseUrl;
-
-  // on met le lien dans l’input
-  shareLinkInput.value = fullUrl;
-  shareLinkInput.select();
-
-  // 🔥 on ouvre automatiquement dans un nouvel onglet
-  window.open(fullUrl, '_blank');
-});
-// 🎵 Lancer la chanson après la première interaction en mode lien partagé
-document.addEventListener('click', () => {
-  if (document.body.classList.contains('view-only')) {
-    const inviteAudio = document.getElementById('invite-audio');
-    if (inviteAudio) {
-      inviteAudio.play().catch(() => {});
-    }
-  }
-}, { once: true });
-
+    // Fermer l’overlay si on clique en dehors du formulaire
+    formOverlay.addEventListener('click', (e) => {
+      if (e.target === formOverlay) {
+        formOverlay.classList.remove('active');
+      }
+    });
   </script>
-
 
 </body>
 </html>

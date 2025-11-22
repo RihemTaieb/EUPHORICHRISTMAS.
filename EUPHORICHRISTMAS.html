@@ -410,6 +410,32 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       }
     }
+    .see-all-wrapper {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.see-all-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: #a72929;          /* même rouge que ta brand */
+  color: #fff;
+  font-size: 0.95rem;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.see-all-btn:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
   </style>
 </head>
 
@@ -422,7 +448,7 @@
     <!-- NAVBAR -->
     <header>
       <div class="nav-inner">
-        <div class="brand">
+        <div class="brand"  href="EUPHORICHRISTMAS.html">
                    <img src="logo.png" alt="Euphoric Christmas" />
 
         </div>
@@ -452,54 +478,61 @@
     </section>
 
     <!-- SECTION INVITATIONS -->
-    <section id="produits">
-      <div class="container inner">
-        <img
-          src="banniere-produits.png"
-          alt="Christmas décor for the shop"
-          class="produits-header-image"
-        >
+   <section id="produits">
+  <div class="container inner">
+    <img
+      src="banniere-produits.png"
+      alt="Christmas décor for the shop"
+      class="produits-header-image"
+    >
 
-        <h2 class="produits-title">Christmas Invitations</h2>
-<p style="text-align:center; max-width:700px; margin:0 auto 20px; font-size:0.95rem;">
-  Create and personalize your own Christmas party invitations inspired by our song
-  <strong>“Euphoric Christmas”</strong>. Choose a design, edit the details and share it
-  with your friends and family – it’s completely free.
-</p>
+    <h2 class="produits-title">Christmas Invitations</h2>
+    <p style="text-align:center; max-width:700px; margin:0 auto 20px; font-size:0.95rem;">
+      Create and personalize your own Christmas party invitations inspired by our song
+      <strong>“Euphoric Christmas”</strong>. Choose a design, edit the details and share it
+      with your friends and family – it’s completely free.
+    </p>
 
-        <div class="carousel-wrapper">
-        <div class="carousel">
-  <!-- flèche gauche -->
-  <button type="button" class="carousel-arrow left" onclick="prevSlide()">&#10094;</button>
+    <div class="carousel-wrapper">
+      <div class="carousel">
+        <!-- left arrow -->
+        <button type="button" class="carousel-arrow left" onclick="prevSlide()">&#10094;</button>
 
-  <!-- Invitation 1 -->
-  <a href="#" onclick="openInvitation('invitation.html'); return false;">
-    <img class="slide active" src="invitation-christmas1 .png" alt="Invitation 1">
-  </a>
+        <!-- Invitation 1 -->
+        <a href="invitation.html">
+          <img class="slide active" src="invitation-christmas1 .png" alt="Invitation 1">
+        </a>
 
-  <!-- Invitation 2 -->
-  <a href="#" onclick="openInvitation('invitation2.html'); return false;">
-    <img class="slide" src="invitation-christmas2.png" alt="Invitation 2">
-  </a>
+        <!-- Invitation 2 -->
+        <a href="invitation2.html">
+          <img class="slide" src="invitation-christmas2.png" alt="Invitation 2">
+        </a>
 
-  <!-- Invitation 3 -->
-  <a href="#" onclick="openInvitation('invitation3.html'); return false;">
-    <img class="slide" src="invitation-christmas3.png" alt="Invitation 3">
-  </a>
+        <!-- Invitation 3 -->
+        <a href="invitation3.html">
+          <img class="slide" src="invitation-christmas3.png" alt="Invitation 3">
+        </a>
 
-  <!-- Invitation 4 -->
-  <a href="#" onclick="openInvitation('invitation4.html'); return false;">
-    <img class="slide" src="invitation-christmas4.png" alt="Invitation 4">
-  </a>
+        <!-- Invitation 4 -->
+        <a href="invitation4.html">
+          <img class="slide" src="invitation-christmas4.png" alt="Invitation 4">
+        </a>
 
-  <!-- flèche droite -->
-  <button type="button" class="carousel-arrow right" onclick="nextSlide()">&#10095;</button>
-</div>
-
-
-        </div>
+        <!-- right arrow -->
+        <button type="button" class="carousel-arrow right" onclick="nextSlide()">&#10095;</button>
       </div>
-    </section>
+    </div>
+
+    <!-- ⭐ Bouton pour voir toute la galerie -->
+    <div class="see-all-wrapper">
+      <a href="gallery.html" class="see-all-btn">
+        View all invitations
+      </a>
+    </div>
+
+  </div>
+</section>
+
 
     <!-- SECTION CHANSON AUDIO -->
    <section id="chanson">
@@ -514,6 +547,7 @@
       Votre navigateur ne supporte pas la lecture audio.
     </audio>
   </div>
+  
 </section>
 
 
@@ -526,11 +560,18 @@
 
         <div class="clip-grid">
           <div>
-            <video src="clip.mp4" controls autoplay muted loop></video>
-            <div class="stream-buttons">
-              <a href="#">Spotify</a>
-              <a href="#">Apple Music</a>
-              <a href="#">YouTube</a>
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/39-fJZ3CzAM?autoplay=1&mute=1&loop=1&playlist=39-fJZ3CzAM"
+        title="Euphoric Christmas"
+        frameborder="0"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>            <div class="stream-buttons">
+              <a href="https://open.spotify.com/intl-fr/track/3VJTbQ930K3dUSh6rw63D4?referral=labelaffiliate&utm_source=1011lBNMf9fA&utm_medium=Indie_TuneCore&utm_campaign=labelaffiliate">Spotify</a>
+              <a href="https://music.apple.com/us/album/1853277565?i=1853277568&app=music">Apple Music</a>
+              <a href="https://youtu.be/39-fJZ3CzAM">YouTube</a>
             </div>
           </div>
         </div>
@@ -544,8 +585,8 @@
 
  <!-- 🔹 "Page 2" = invitation plein écran -->
 <div id="page2" class="hidden">
-  <button
     type="button"
+  <button
     class="back-btn"
     onclick="backToMain()"
   >
